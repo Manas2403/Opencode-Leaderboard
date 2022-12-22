@@ -82,6 +82,7 @@ getData().then((data) => {
     // console.log(data);
     hasNext = data.has_next;
     addToTable(data.data);
+    timer(data.lastupdated);
     isFetching = false;
 });
 function addToTable(arr) {
@@ -152,4 +153,18 @@ function addToTable(arr) {
          `;
         $(".rank-list").append(markup);
     }
+}
+
+function timer(countDownDate) {
+    var now = new Date().getTime();
+    var timeleft = countDownDate * 1000 + 1000 * 60 * 30 - now;
+    if (timeleft < 0) {
+        window.location.reload();
+    }
+    var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+    document.getElementById("mins").innerHTML = minutes;
+    document.getElementById("secs").innerHTML = seconds;
+    setTimeout(timer, 1000, countDownDate);
 }
