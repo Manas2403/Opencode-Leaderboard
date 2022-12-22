@@ -1,44 +1,45 @@
-const body = document.querySelector('body');
+const body = document.querySelector("body");
 const header = document.querySelector("header");
 var toggleButton = document.getElementById("toggle");
-var geekHaven_logo=document.getElementById("geekhaven_logo");
+var geekHaven_logo = document.getElementById("geekhaven_logo");
 
 $(document).ready(() => {
-    let isDarkMode = localStorage.getItem('dark');
-    if (isDarkMode === null)
-        {   geekHaven_logo.src="./Assets/geekhaven_lightmode1.png";
-            return localStorage.setItem('dark', 0);
+    let isDarkMode = localStorage.getItem("dark");
+    if (isDarkMode === null) {
+        geekHaven_logo.src = "./Assets/geekhaven_lightmode1.png";
+        return localStorage.setItem("dark", 0);
     }
     if (isDarkMode == 1) {
         // console.log('came here2');
         toggleButton.classList.add("active");
-        body.style.background = "linear-gradient(315deg, #485461 0%, #28313b 74%)";
+        body.style.background =
+            "linear-gradient(315deg, #485461 0%, #28313b 74%)";
         header.style.color = "white";
-        geekHaven_logo.src="./Assets/geekhaven_darkmode.png";
-    }
-    else if(isDarkMode==0)
-        geekHaven_logo.src="./Assets/geekhaven_lightmode.png";
+        geekHaven_logo.src = "./Assets/geekhaven_darkmode.png";
+    } else if (isDarkMode == 0)
+        geekHaven_logo.src = "./Assets/geekhaven_lightmode.png";
     setTimeout(() => {
-        const confetti = document.querySelector('#tsparticles');
+        const confetti = document.querySelector("#tsparticles");
         confetti.remove();
     }, 5000);
 });
 toggleButton.onclick = function () {
     toggleButton.classList.toggle("active");
-    let isDarkMode = localStorage.getItem('dark');
+    let isDarkMode = localStorage.getItem("dark");
     if (isDarkMode == 0) {
-        body.style.background = "linear-gradient(315deg, #485461 0%, #28313b 74%)";
+        body.style.background =
+            "linear-gradient(315deg, #485461 0%, #28313b 74%)";
         header.style.color = "white";
-        geekHaven_logo.src="./Assets/geekhaven_darkmode.png";
+        geekHaven_logo.src = "./Assets/geekhaven_darkmode.png";
         isDarkMode = 1;
-    }
-    else {
-        body.style.background = "linear-gradient( -45deg, rgba(236, 190, 176, 0.8), rgba(178, 219, 235, 0.8), rgba(189, 235, 224, 0.8))";
+    } else {
+        body.style.background =
+            "linear-gradient( -45deg, rgba(236, 190, 176, 0.8), rgba(178, 219, 235, 0.8), rgba(189, 235, 224, 0.8))";
         header.style.color = "black";
-        geekHaven_logo.src="./Assets/geekhaven_lightmode.png";
+        geekHaven_logo.src = "./Assets/geekhaven_lightmode.png";
         isDarkMode = 0;
     }
-    localStorage.setItem('dark', isDarkMode);
+    localStorage.setItem("dark", isDarkMode);
 };
 
 var page = 1;
@@ -46,37 +47,37 @@ var rank = 0;
 var lastScore = -1;
 var hasNext = true;
 let isFetching = true;
-const $end = document.querySelector('#end');
-const $loader = document.querySelector('.loader');
+const $end = document.querySelector("#end");
+const $loader = document.querySelector(".loader");
 async function getData() {
-    $loader.classList.remove('hide');
-    let res = await fetch(`https://opencodeiiita.herokuapp.com/get-all-data/?page=${page}`);
+    $loader.classList.remove("hide");
+    let res = await fetch(
+        `https://leaderboard-response-cache.anurag10jain.repl.co/get-all-data`
+    );
     let data = await res.json();
-    $loader.classList.add('hide');
+    $loader.classList.add("hide");
     return data;
 }
-window.addEventListener('scroll', () => {
-    if (isFetching)
-        return;
+window.addEventListener("scroll", () => {
+    if (isFetching) return;
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         page++;
         isFetching = true;
         if (hasNext) {
             previousFetched = Date.now();
-            getData().then(data => {
+            getData().then((data) => {
                 isFetching = true;
                 hasNext = data.has_next;
                 addToTable(data.data);
                 isFetching = false;
             });
-        }
-        else {
+        } else {
             $end.style.display = "block";
             isFetching = true;
         }
     }
 });
-getData().then(data => {
+getData().then((data) => {
     isFetching = true;
     // console.log(data);
     hasNext = data.has_next;
@@ -87,7 +88,7 @@ function addToTable(arr) {
     var i;
     for (i = 0; i < arr.length; i++) {
         name = arr[i].username;
-        points = arr[i].totalPoints;
+        points = arr[i].total_points;
         fullname = arr[i].name;
         college = arr[i].college;
         if (lastScore !== points) {
@@ -149,6 +150,6 @@ function addToTable(arr) {
         </ul>
         </li>
          `;
-        $('.rank-list').append(markup);
+        $(".rank-list").append(markup);
     }
 }
