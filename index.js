@@ -6,7 +6,7 @@ var geekHaven_logo = document.getElementById("geekhaven_logo");
 $(document).ready(() => {
     let isDarkMode = localStorage.getItem("dark");
     if (isDarkMode === null) {
-        geekHaven_logo.src = "./Assets/geekhaven_lightmode1.png";
+        geekHaven_logo.src = "/Assets/geekhaven_lightmode1.png";
         return localStorage.setItem("dark", 0);
     }
     if (isDarkMode == 1) {
@@ -15,9 +15,9 @@ $(document).ready(() => {
         body.style.background =
             "linear-gradient(315deg, #485461 0%, #28313b 74%)";
         header.style.color = "white";
-        geekHaven_logo.src = "./Assets/geekhaven_darkmode.png";
+        geekHaven_logo.src = "/Assets/geekhaven_darkmode.png";
     } else if (isDarkMode == 0)
-        geekHaven_logo.src = "./Assets/geekhaven_lightmode.png";
+        geekHaven_logo.src = "/Assets/geekhaven_lightmode.png";
     setTimeout(() => {
         const confetti = document.querySelector("#tsparticles");
         confetti.remove();
@@ -30,13 +30,13 @@ toggleButton.onclick = function () {
         body.style.background =
             "linear-gradient(315deg, #485461 0%, #28313b 74%)";
         header.style.color = "white";
-        geekHaven_logo.src = "./Assets/geekhaven_darkmode.png";
+        geekHaven_logo.src = "/Assets/geekhaven_darkmode.png";
         isDarkMode = 1;
     } else {
         body.style.background =
             "linear-gradient( -45deg, rgba(236, 190, 176, 0.8), rgba(178, 219, 235, 0.8), rgba(189, 235, 224, 0.8))";
         header.style.color = "black";
-        geekHaven_logo.src = "./Assets/geekhaven_lightmode.png";
+        geekHaven_logo.src = "/Assets/geekhaven_lightmode.png";
         isDarkMode = 0;
     }
     localStorage.setItem("dark", isDarkMode);
