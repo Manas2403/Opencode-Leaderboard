@@ -52,7 +52,7 @@ const $loader = document.querySelector(".loader");
 async function getData() {
     $loader.classList.remove("hide");
     let res = await fetch(
-        `https://leaderboard-response-cache.anurag10jain.repl.co/get-all-data`
+        `https://opencode-hook.onrender.com/get-all-data`
     );
     let data = await res.json();
     $loader.classList.add("hide");
