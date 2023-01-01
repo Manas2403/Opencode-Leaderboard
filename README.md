@@ -1,5 +1,5 @@
-# 🐱‍💻 Opencode21-LeaderboardFrontend
-Live leaderboard for Opencode'21 contributors
+# 🐱‍💻 Opencode22-LeaderboardFrontend
+Live leaderboard for Opencode'22 contributors
 
 ### 🎈 Tech-stack 
  - HTML
